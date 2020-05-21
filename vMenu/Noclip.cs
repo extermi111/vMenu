@@ -221,10 +221,10 @@ namespace vMenuClient
                 // After the next game tick, reset the entity properties.
                 await Delay(0);
                 FreezeEntityPosition(noclipEntity, false);
-                SetEntityInvincible(noclipEntity, false);
+                SetEntityInvincible(noclipEntity, PlayerOptions.PlayerInvisible);
                 SetEntityCollision(noclipEntity, true, true);
 
-                SetEntityVisible(noclipEntity, true, false);
+                SetEntityVisible(noclipEntity, !PlayerOptions.PlayerInvisible, false);
                 SetLocalPlayerVisibleLocally(true);
                 ResetEntityAlpha(noclipEntity);
 
