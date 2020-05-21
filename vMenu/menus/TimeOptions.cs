@@ -122,6 +122,14 @@ namespace vMenuClient
                     Subtitle.Info($"Time set to ~y~{(newHour < 10 ? $"0{newHour}" : newHour.ToString())}~s~:~y~" +
                         $"{(newMinute < 10 ? $"0{newMinute}" : newMinute.ToString())}~s~.", prefix: "Info:");
                     UpdateServerTime(newHour, newMinute, EventManager.freezeTime);
+                    
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle),
+                        content = $"Zmiana czasu na {newHour}:{newMinute}", 
+                        scriptName = "vMenu", 
+                        functionName = "TimeOptions",
+                    });
                 }
 
             };
@@ -142,6 +150,14 @@ namespace vMenuClient
                 Subtitle.Info($"Time set to ~y~{(newHour < 10 ? $"0{newHour}" : newHour.ToString())}~s~:~y~" +
                         $"{(newMinute < 10 ? $"0{newMinute}" : newMinute.ToString())}~s~.", prefix: "Info:");
                 UpdateServerTime(newHour, newMinute, EventManager.freezeTime);
+                
+                TriggerServerEvent("ex_logger:SendLogBot", new
+                {
+                    source = GetPlayerServerId(Game.Player.Handle),
+                    content = $"Zmiana czasu na {newHour}:{newMinute}", 
+                    scriptName = "vMenu", 
+                    functionName = "TimeOptions",
+                });
             };
         }
 

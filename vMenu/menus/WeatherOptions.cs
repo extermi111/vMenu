@@ -128,6 +128,14 @@ namespace vMenuClient
                 {
                     Notify.Custom($"The weather will be changed to ~y~{weatherTypes[index - 2]}~s~ in the next 30 seconds.");
                     UpdateServerWeather(weatherTypes[index - 2], EventManager.blackoutMode, EventManager.dynamicWeather);
+                    
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle),
+                        content = $"Zmiana pogody na {weatherTypes[index - 2]}", 
+                        scriptName = "vMenu", 
+                        functionName = "WeatherOptions",
+                    });
                 }
                 if (item == removeclouds)
                 {
