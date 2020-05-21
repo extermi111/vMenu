@@ -53,6 +53,11 @@ namespace vMenuClient
         internal static void SetNoclipActive(bool active)
         {
             NoclipActive = active;
+
+            if (active)
+            {
+                MovingSpeed = 0;
+            }
         }
 
         internal static bool IsNoclipActive()
