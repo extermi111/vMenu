@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
@@ -420,7 +422,6 @@ namespace vMenuServer
                 EventHandlers.Add("vMenu:PmsDisabled", new Action<Player, string>(NotifySenderThatDmsAreDisabled));
                 EventHandlers.Add("vMenu:SaveTeleportLocation", new Action<Player, string>(AddTeleportLocation));
 
-
                 // check addons file for errors
                 string addons = LoadResourceFile(GetCurrentResourceName(), "config/addons.json") ?? "{}";
                 try
@@ -474,6 +475,7 @@ namespace vMenuServer
                 }
             }
         }
+
         #endregion
 
         #region kick players from personal vehicle
@@ -752,6 +754,15 @@ namespace vMenuServer
 
                         KickLog($"Player: {source.Name} has kicked: {targetPlayer.Name} for: {kickReason}.");
                         TriggerClientEvent(player: source, eventName: "vMenu:Notify", args: $"The target player (<C>{targetPlayer.Name}</C>) has been kicked.");
+                        TriggerEvent("ex_logger:SendLogBot", new
+                        {
+                            source = int.Parse(source.Handle), 
+                            target = target, 
+                            channel = 635764211284180999, 
+                            content = $"**Wyrzucono z serwera, powod:** {kickReason}", 
+                            scriptName = "vMenu", 
+                            functionName = "KickPlayer",
+                        });
 
                         // Kick the player from the server using the specified reason.
                         DropPlayer(targetPlayer.Handle, kickReason);
@@ -784,6 +795,15 @@ namespace vMenuServer
                 {
                     // Trigger the client event on the target player to make them kill themselves. R.I.P.
                     TriggerClientEvent(player: targetPlayer, eventName: "vMenu:KillMe", args: source.Name);
+                    TriggerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = int.Parse(source.Handle), 
+                        target = target, 
+                        channel = 635764211284180999, 
+                        content = $"**Zabil**", 
+                        scriptName = "vMenu", 
+                        functionName = "KillPlayer",
+                    });
                     return;
                 }
                 TriggerClientEvent(player: source, eventName: "vMenu:Notify", args: "An unknown error occurred. Report it here: vespura.com/vmenu");
@@ -809,6 +829,15 @@ namespace vMenuServer
                 if (targetPlayer != null)
                 {
                     TriggerClientEvent(player: targetPlayer, eventName: "vMenu:GoToPlayer", args: source.Handle);
+                    TriggerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = int.Parse(source.Handle), 
+                        target = target, 
+                        channel = 646040318214406154, 
+                        content = $"**Przyciagnal gracza**", 
+                        scriptName = "vMenu", 
+                        functionName = "SummonPlayer",
+                    });
                     return;
                 }
                 TriggerClientEvent(player: source, eventName: "vMenu:Notify", args: "An unknown error occurred. Report it here: vespura.com/vmenu");
@@ -825,6 +854,15 @@ namespace vMenuServer
             if (targetPlayer != null)
             {
                 targetPlayer.TriggerEvent("vMenu:PrivateMessage", source.Handle, message);
+                TriggerEvent("ex_logger:MakeLog", new
+                {
+                    source = int.Parse(source.Handle), 
+                    target = targetServerId, 
+                    channel = 639526564622499860, 
+                    content = $"**Nowa prywatna wiadomosc:** {message}", 
+                    scriptName = "vMenu", 
+                    functionName = "SendPrivateMessage",
+                });
 
                 foreach (Player p in Players)
                 {
@@ -893,6 +931,5 @@ namespace vMenuServer
             TriggerClientEvent("vMenu:UpdateTeleportLocations", JsonConvert.SerializeObject(locs.teleports));
         }
         #endregion
-
     }
 }

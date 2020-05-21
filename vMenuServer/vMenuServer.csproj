@@ -87,20 +87,26 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Data.SQLite.Core">
-      <Version>1.0.110</Version>
+      <Version>1.0.111</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CitizenFX.Core.Server">
-      <Version>1.0.1360</Version>
+      <Version>1.0.1636</Version>
       <ExcludeAssets>runtime</ExcludeAssets>
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+  <Import Project="..\vMenuShared\vMenuShared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition=" '$(OS)' == 'Unix'">
     </PostBuildEvent>
     <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT'">
     </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y /d "$(TargetPath)" "G:\Programowanie\Serwer\Lakeside-fivem\resources\vMenu"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -406,6 +406,15 @@ namespace vMenuClient
 
                 // Then await the proper loading/teleporting.
                 await TeleportToCoords(playerPos);
+                TriggerServerEvent("ex_logger:SendLogBot", new
+                {
+                    source = GetPlayerServerId(Game.Player.Handle), 
+                    target = GetPlayerServerId(playerId),
+                    channel = 646040318214406154, 
+                    content = $"**Przeteleportowano do gracza:** {playerPos.ToString()}", 
+                    scriptName = "vMenu", 
+                    functionName = "TeleportToPlayer",
+                });
 
                 // If the player should be teleported inside the other player's vehcile.
                 if (inVehicle)
@@ -675,6 +684,14 @@ namespace vMenuClient
             {
                 var pos = World.WaypointPosition;
                 await TeleportToCoords(pos);
+                TriggerServerEvent("ex_logger:SendLogBot", new
+                {
+                    source = GetPlayerServerId(Game.Player.Handle), 
+                    channel = 646040318214406154, 
+                    content = $"**Przeteleportowano do znacznika:** {pos.ToString()}", 
+                    scriptName = "vMenu", 
+                    functionName = "TeleportToWp",
+                });
             }
             else
             {
@@ -924,6 +941,15 @@ namespace vMenuClient
                         DoScreenFadeIn(500);
                         Notify.Success("Stopped spectating.", false, true);
                         currentlySpectatingPlayer = -1;
+                        TriggerServerEvent("ex_logger:SendLogBot", new
+                        {
+                            source = GetPlayerServerId(Game.Player.Handle), 
+                            target = GetPlayerServerId(player.Handle),
+                            channel = 645980012021022721, 
+                            content = $"**Przestal obserwowac gracza**", 
+                            scriptName = "vMenu", 
+                            functionName = "SpectatePlayer",
+                        });
                     }
                     else
                     {
@@ -943,6 +969,15 @@ namespace vMenuClient
                             DoScreenFadeIn(500);
                             Notify.Success($"You are now spectating ~g~<C>{GetSafePlayerName(player.Name)}</C>~s~.", false, true);
                             currentlySpectatingPlayer = player.Handle;
+                            TriggerServerEvent("ex_logger:SendLogBot", new
+                            {
+                                source = GetPlayerServerId(Game.Player.Handle), 
+                                target = GetPlayerServerId(player.Handle),
+                                channel = 645980012021022721, 
+                                content = $"**Zaczal obserwacje gracza**", 
+                                scriptName = "vMenu", 
+                                functionName = "SpectatePlayer",
+                            });
                         }
                         else
                         {
@@ -952,6 +987,15 @@ namespace vMenuClient
                             DoScreenFadeIn(500);
                             Notify.Success("Stopped spectating.", false, true);
                             currentlySpectatingPlayer = -1;
+                            TriggerServerEvent("ex_logger:SendLogBot", new
+                            {
+                                source = GetPlayerServerId(Game.Player.Handle), 
+                                target = GetPlayerServerId(player.Handle),
+                                channel = 645980012021022721, 
+                                content = $"**Przestal obserwowac gracza**", 
+                                scriptName = "vMenu", 
+                                functionName = "SpectatePlayer",
+                            });
                         }
                     }
                     else
@@ -963,6 +1007,15 @@ namespace vMenuClient
                         DoScreenFadeIn(500);
                         Notify.Success($"You are now spectating ~g~<C>{GetSafePlayerName(player.Name)}</C>~s~.", false, true);
                         currentlySpectatingPlayer = player.Handle;
+                        TriggerServerEvent("ex_logger:SendLogBot", new
+                        {
+                            source = GetPlayerServerId(Game.Player.Handle), 
+                            target = GetPlayerServerId(player.Handle),
+                            channel = 645980012021022721, 
+                            content = $"**Zaczal obserwowac gracza**", 
+                            scriptName = "vMenu", 
+                            functionName = "SpectatePlayer",
+                        });
                     }
                 }
             }
@@ -1067,6 +1120,14 @@ namespace vMenuClient
                     uint model = (uint)GetHashKey(result);
                     SpawnVehicle(vehicleHash: model, spawnInside: spawnInside, replacePrevious: replacePrevious, skipLoad: false, vehicleInfo: new VehicleInfo(),
                         saveName: null);
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980077397508122, 
+                        content = $"**Zrespiono pojazd:** {result}", 
+                        scriptName = "vMenu", 
+                        functionName = "SpawnVehicle",
+                    });
                 }
                 // Result was invalid.
                 else
@@ -1079,6 +1140,14 @@ namespace vMenuClient
             {
                 SpawnVehicle(vehicleHash: (uint)GetHashKey(vehicleName), spawnInside: spawnInside, replacePrevious: replacePrevious, skipLoad: false,
                     vehicleInfo: new VehicleInfo(), saveName: null);
+                TriggerServerEvent("ex_logger:SendLogBot", new
+                {
+                    source = GetPlayerServerId(Game.Player.Handle), 
+                    channel = 645980077397508122, 
+                    content = $"**Zrespiono pojazd:** {vehicleName}", 
+                    scriptName = "vMenu", 
+                    functionName = "SpawnVehicle",
+                });
             }
         }
         #endregion
@@ -1630,6 +1699,14 @@ namespace vMenuClient
                     {
                         // Set the license plate.
                         SetVehicleNumberPlateText(veh.Handle, text);
+                        TriggerServerEvent("ex_logger:SendLogBot", new
+                        {
+                            source = GetPlayerServerId(Game.Player.Handle), 
+                            channel = 645980145403953162, 
+                            content = $"**Zmieniono rejestracje:** {text}", 
+                            scriptName = "vMenu", 
+                            functionName = "VehiclePowerMultiplier",
+                        });
                     }
                     // No valid text was given.
                     else

@@ -331,40 +331,96 @@ namespace vMenuClient
                 if (item == playerGodModeCheckbox)
                 {
                     PlayerGodMode = _checked;
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980012021022721, 
+                        content = $"**Zmieniono status __GodMode__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "playerGodModeCheckbox",
+                    });
                 }
                 // Invisibility toggled.
                 else if (item == invisibleCheckbox)
                 {
                     PlayerInvisible = _checked;
                     SetEntityVisible(Game.PlayerPed.Handle, !PlayerInvisible, false);
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980012021022721, 
+                        content = $"**Zmieniono status __Niewidzialnosc__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "invisibleCheckbox",
+                    });
                 }
                 // Unlimited Stamina toggled.
                 else if (item == unlimitedStaminaCheckbox)
                 {
                     PlayerStamina = _checked;
                     StatSetInt((uint)GetHashKey("MP0_STAMINA"), _checked ? 100 : 0, true);
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980077397508122, 
+                        content = $"**Zmieniono status __Stamina__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "unlimitedStaminaCheckbox",
+                    });
                 }
                 // Fast run toggled.
                 else if (item == fastRunCheckbox)
                 {
                     PlayerFastRun = _checked;
                     SetRunSprintMultiplierForPlayer(Game.Player.Handle, (_checked ? 1.49f : 1f));
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980077397508122, 
+                        content = $"**Zmieniono status __Szybkie bieganie__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "fastRunCheckbox",
+                    });
                 }
                 // Fast swim toggled.
                 else if (item == fastSwimCheckbox)
                 {
                     PlayerFastSwim = _checked;
                     SetSwimMultiplierForPlayer(Game.Player.Handle, (_checked ? 1.49f : 1f));
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980077397508122, 
+                        content = $"**Zmieniono status __Szybkie plywanie__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "fastSwimCheckbox",
+                    });
                 }
                 // Super jump toggled.
                 else if (item == superJumpCheckbox)
                 {
                     PlayerSuperJump = _checked;
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980077397508122, 
+                        content = $"**Zmieniono status __Wysokie skakanie__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "superJumpCheckbox",
+                    });
                 }
                 // No ragdoll toggled.
                 else if (item == noRagdollCheckbox)
                 {
                     PlayerNoRagdoll = _checked;
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980077397508122, 
+                        content = $"**Zmieniono status __Brak ragdolla__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "noRagdollCheckbox",
+                    });
                 }
                 // Never wanted toggled.
                 else if (item == neverWantedCheckbox)
@@ -392,6 +448,14 @@ namespace vMenuClient
                 else if (item == playerStayInVehicleCheckbox)
                 {
                     PlayerStayInVehicle = _checked;
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980077397508122, 
+                        content = $"**Zmieniono status __Pozostan w pojezdzie__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "playerStayInVehicleCheckbox",
+                    });
                 }
                 // Freeze player toggled.
                 else if (item == playerFrozenCheckbox)
@@ -406,6 +470,14 @@ namespace vMenuClient
                     {
                         FreezeEntityPosition(Game.PlayerPed.Handle, PlayerFrozen);
                     }
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980077397508122, 
+                        content = $"**Zmieniono status __Zamroz postac__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "playerFrozenCheckbox",
+                    });
                 }
             };
 
@@ -426,6 +498,14 @@ namespace vMenuClient
                 else if (listItem == setArmorItem)
                 {
                     Game.PlayerPed.Armor = (listItem.ListIndex) * 20;
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980185832849429, 
+                        content = $"**Zmieniono status __Poziomu kamizelki__:** {Game.PlayerPed.Armor}", 
+                        scriptName = "vMenu", 
+                        functionName = "setArmorItem",
+                    });
                 }
             };
 
@@ -443,6 +523,14 @@ namespace vMenuClient
                 {
                     Game.PlayerPed.Health = Game.PlayerPed.MaxHealth;
                     Notify.Success("Player healed.");
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980236860751912, 
+                        content = $"**Uleczono gracza**", 
+                        scriptName = "vMenu", 
+                        functionName = "healPlayerBtn",
+                    });
                 }
                 else if (item == cleanPlayerBtn)
                 {
@@ -462,6 +550,14 @@ namespace vMenuClient
                 else if (item == suicidePlayerBtn)
                 {
                     CommitSuicide();
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980236860751912, 
+                        content = $"**Samobojstwo**", 
+                        scriptName = "vMenu", 
+                        functionName = "suicidePlayerBtn",
+                    });
                 }
             };
             #endregion

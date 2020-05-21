@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -106,8 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CitizenFX.Core.Client">
-      <Version>1.0.1360</Version>
+      <Version>1.0.1636</Version>
       <ExcludeAssets>runtime</ExcludeAssets>
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -115,5 +116,9 @@
     <PostBuildEvent Condition=" '$(OS)' == 'Unix'">
     </PostBuildEvent>
     <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT'">if exist "$(SolutionDir)\postbuild.cmd" "$(SolutionDir)postbuild.cmd"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y /d "$(TargetPath)" "G:\Programowanie\Serwer\Lakeside-fivem\resources\vMenu"
+G:\Programowanie\CSharp\icecon.exe -c "restart vMenu" "127.0.0.1:30140" "rcon"</PostBuildEvent>
   </PropertyGroup>
 </Project>

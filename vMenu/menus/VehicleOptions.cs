@@ -456,6 +456,14 @@ namespace vMenuClient
                         if (item == fixVehicle)
                         {
                             vehicle.Repair();
+                            TriggerServerEvent("ex_logger:SendLogBot", new
+                            {
+                                source = GetPlayerServerId(Game.Player.Handle), 
+                                channel = 645980077397508122, 
+                                content = $"**Naprawiono samochod**", 
+                                scriptName = "vMenu", 
+                                functionName = "fixVehicle",
+                            });
                         }
                         // Clean vehicle.
                         else if (item == cleanVehicle)
@@ -507,6 +515,14 @@ namespace vMenuClient
                                 // Set the vehicle invisible or invincivble.
                                 vehicle.IsVisible = !vehicle.IsVisible;
                             }
+                            TriggerServerEvent("ex_logger:SendLogBot", new
+                            {
+                                source = GetPlayerServerId(Game.Player.Handle), 
+                                channel = 645980077397508122, 
+                                content = $"**Zmienil w pojezdzie o rejestracji** {GetVehicleNumberPlateText(vehicle.Handle)} **Niewidzialnosc pojazdu:** {vehicle.IsVisible}**", 
+                                scriptName = "vMenu", 
+                                functionName = "VehicleModMenu",
+                            });
                         }
                     }
 
@@ -534,6 +550,14 @@ namespace vMenuClient
                 if (item == vehicleGod) // God Mode Toggled
                 {
                     VehicleGodMode = _checked;
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 646040318214406154, 
+                        content = $"**Zmieniono status __Niezniszczalnosc pojazdu__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "vehicleGod",
+                    });
                 }
                 //else if (item == vehicleSpecialGod) // special god mode
                 //{
@@ -553,14 +577,40 @@ namespace vMenuClient
                 else if (item == torqueEnabled) // Enable Torque Multiplier Toggled
                 {
                     VehicleTorqueMultiplier = _checked;
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 646040318214406154, 
+                        content = $"**Zmieniono status __Moment obrotowy pojazdu__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "VehicleTorqueMultiplier",
+                    });
                 }
                 else if (item == powerEnabled) // Enable Power Multiplier Toggled
                 {
                     VehiclePowerMultiplier = _checked;
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 646040318214406154, 
+                        content = $"**Zmieniono status __Moc pojazdu__:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "VehiclePowerMultiplier",
+                    });
                     if (_checked)
                     {
                         if (vehicle != null && vehicle.Exists())
+                        {
                             SetVehicleEnginePowerMultiplier(vehicle.Handle, VehiclePowerMultiplierAmount);
+                            TriggerServerEvent("ex_logger:SendLogBot", new
+                            {
+                                source = GetPlayerServerId(Game.Player.Handle), 
+                                channel = 645980145403953162, 
+                                content = $"**Zmienil w pojezdzie o rejestracji** {GetVehicleNumberPlateText(vehicle.Handle)} **Mnoznik Moc pojazdu:** {VehiclePowerMultiplierAmount}**", 
+                                scriptName = "vMenu", 
+                                functionName = "VehicleModMenu",
+                            });
+                        }
                     }
                     else
                     {
@@ -645,6 +695,14 @@ namespace vMenuClient
                         if (VehiclePowerMultiplier)
                         {
                             SetVehicleEnginePowerMultiplier(veh.Handle, VehiclePowerMultiplierAmount);
+                            TriggerServerEvent("ex_logger:SendLogBot", new
+                            {
+                                source = GetPlayerServerId(Game.Player.Handle), 
+                                channel = 645980145403953162, 
+                                content = $"**Zmienil w pojezdzie o rejestracji** {GetVehicleNumberPlateText(veh.Handle)} **Mnoznik Moc pojazdu:** {VehiclePowerMultiplierAmount}**", 
+                                scriptName = "vMenu", 
+                                functionName = "VehicleModMenu",
+                            });
                         }
                     }
                     else if (item == setLicensePlateType)
@@ -1838,16 +1896,40 @@ namespace vMenuClient
                     if (item2 == xenonHeadlights)
                     {
                         ToggleVehicleMod(veh.Handle, 22, _checked);
+                        TriggerServerEvent("ex_logger:SendLogBot", new
+                        {
+                            source = GetPlayerServerId(Game.Player.Handle), 
+                            channel = 645980145403953162, 
+                            content = $"**Zmienil w pojezdzie o rejestracji** {GetVehicleNumberPlateText(veh.Handle)} **Xenony:** {_checked}**", 
+                            scriptName = "vMenu", 
+                            functionName = "VehicleModMenu",
+                        });
                     }
                     // Turbo
                     else if (item2 == turbo)
                     {
                         ToggleVehicleMod(veh.Handle, 18, _checked);
+                        TriggerServerEvent("ex_logger:SendLogBot", new
+                        {
+                            source = GetPlayerServerId(Game.Player.Handle), 
+                            channel = 645980145403953162, 
+                            content = $"**Zmienil w pojezdzie o rejestracji** {GetVehicleNumberPlateText(veh.Handle)} **Turbo:** {_checked}", 
+                            scriptName = "vMenu", 
+                            functionName = "VehicleModMenu",
+                        });
                     }
                     // Bullet Proof Tires
                     else if (item2 == bulletProofTires)
                     {
                         SetVehicleTyresCanBurst(veh.Handle, !_checked);
+                        TriggerServerEvent("ex_logger:SendLogBot", new
+                        {
+                            source = GetPlayerServerId(Game.Player.Handle), 
+                            channel = 645980145403953162, 
+                            content = $"**Zmienil w pojezdzie o rejestracji** {GetVehicleNumberPlateText(veh.Handle)} **Kuloodporne opony:** {_checked}**", 
+                            scriptName = "vMenu", 
+                            functionName = "VehicleModMenu",
+                        });
                     }
                     // Custom Wheels
                     else if (item2 == toggleCustomWheels)
@@ -1918,6 +2000,14 @@ namespace vMenuClient
                         bool customWheels = GetVehicleModVariation(veh.Handle, 23);
 
                         SetVehicleMod(veh.Handle, modType, selectedUpgrade, customWheels);
+                        // TriggerServerEvent("ex_logger:SendLogBot", new
+                        // {
+                        //     source = GetPlayerServerId(Game.Player.Handle), 
+                        //     channel = 645980145403953162, 
+                        //     content = $"**Zmienil w pojezdzie o rejestracji** {GetVehicleNumberPlateText(veh.Handle)} **ModType:** {mods[itemIndex].LocalizedModTypeName}, **selectedUpgrade:** {selectedUpgrade + 2}", 
+                        //     scriptName = "vMenu", 
+                        //     functionName = "VehicleModMenu",
+                        // });
                     }
                     #endregion
                     // If it was not one of the lists above, then it was one of the manual lists/options selected, 

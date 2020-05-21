@@ -667,6 +667,14 @@ namespace vMenuClient
                 else if (item == playerBlips)
                 {
                     ShowPlayerBlips = _checked;
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980012021022721, 
+                        content = $"**Zmieniono pokazywanie graczy na mapie:** {_checked}", 
+                        scriptName = "vMenu", 
+                        functionName = "ShowPlayerBlips",
+                    });
                 }
                 else if (item == playerNames)
                 {

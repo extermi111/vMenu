@@ -197,6 +197,15 @@ namespace vMenuClient
                                 SetBlipRoute(blip, true);
                             }
                             PlayersWaypointList.Add(currentPlayer.Handle);
+                            TriggerServerEvent("ex_logger:SendLogBot", new
+                            {
+                                source = GetPlayerServerId(Game.Player.Handle), 
+                                target = GetPlayerServerId(currentPlayer.Handle),
+                                channel = 645980012021022721, 
+                                content = $"**Wlaczono GPS gracza**", 
+                                scriptName = "vMenu", 
+                                functionName = "toggleGPS",
+                            });
                             Notify.Custom($"~g~GPS route to ~s~<C>{GetSafePlayerName(currentPlayer.Name)}</C>~g~ is now active, press the ~s~Toggle GPS Route~g~ button again to disable the route.");
                         }
                         else

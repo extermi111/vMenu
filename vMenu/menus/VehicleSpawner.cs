@@ -269,6 +269,14 @@ namespace vMenuClient
                 vehicleClassMenu.OnItemSelect += (sender2, item2, index2) =>
                 {
                     SpawnVehicle(VehicleData.Vehicles.VehicleClasses[className][index2], SpawnInVehicle, ReplaceVehicle);
+                    TriggerServerEvent("ex_logger:SendLogBot", new
+                    {
+                        source = GetPlayerServerId(Game.Player.Handle), 
+                        channel = 645980077397508122, 
+                        content = $"**Zrespiono pojazd:** {VehicleData.Vehicles.VehicleClasses[className][index2]}", 
+                        scriptName = "vMenu", 
+                        functionName = "SpawnVehicle",
+                    });
                 };
             }
             #endregion

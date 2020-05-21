@@ -495,6 +495,14 @@ namespace vMenuClient
                         {
                             NoClipEnabled = !NoClipEnabled;
                         }
+                        TriggerServerEvent("ex_logger:SendLogBot", new
+                        {
+                            source = GetPlayerServerId(Game.Player.Handle), 
+                            channel = 646040318214406154, 
+                            content = $"**Zmieniono status __NoClip__:** {NoClipEnabled}", 
+                            scriptName = "vMenu", 
+                            functionName = "NoClip",
+                        });
                     }
                 }
 
